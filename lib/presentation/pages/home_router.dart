@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/user.dart';
 import '../bloc/app_state/app_state_bloc.dart';
 import 'admin/admin_dashboard.dart';
 import 'student/student_dashboard.dart';

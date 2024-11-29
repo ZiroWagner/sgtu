@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/api/dio_client.dart';
 import 'data/datasources/auth_remote_data_source.dart';
@@ -13,10 +14,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Hacer la barra de navegación transparente
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF050522), // Barra de navegación transparente
+      systemNavigationBarIconBrightness: Brightness.light,
+
+    ));
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(

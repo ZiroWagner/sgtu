@@ -1,38 +1,58 @@
 import 'package:flutter/material.dart';
 import '../../../domain/entities/user.dart';
+import '../../widgets/dashboard/profile_card.dart';
+import '../../widgets/dashboard/bottom_nav_bar.dart';
 
-class StudentDashboard extends StatelessWidget {
+class StudentDashboard extends StatefulWidget {
   final User user;
 
-  const StudentDashboard({Key? key, required this.user}) : super(key: key);
+  const StudentDashboard({super.key, required this.user});
+
+  @override
+  State<StudentDashboard> createState() => _StudentDashboardState();
+}
+
+class _StudentDashboardState extends State<StudentDashboard> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF050522),
       appBar: AppBar(
-        title: Text('Panel de Estudiante'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Bienvenido, ${user.nombre}!'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Implementar lógica para ver progreso de tesis
-              },
-              child: Text('Ver Progreso de Tesis'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                // Implementar lógica para enviar solicitudes
-              },
-              child: Text('Enviar Solicitud'),
-            ),
-          ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          'Home',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_outlined),
+            color: Colors.white,
+            onPressed: () {
+              // Implementar notificaciones
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          ProfileCard(user: widget.user),
+          // Aquí irá el contenido específico del estudiante
+        ],
+      ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }
