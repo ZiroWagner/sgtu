@@ -19,13 +19,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         result.fold(
               (failure) {
-            print('Error en AuthBloc: $failure');
+            print('Error en AuthBloc: ${failure.message}');
             if (failure is TimeoutFailure) {
-              emit(const AuthError(message: 'La conexión tardó demasiado. Por favor, inténtalo de nuevo.'));
+              emit(AuthError(message: 'La conexión tardó demasiado. Por favor, inténtalo de nuevo. ${failure.message}'));
             } else if (failure is ServerFailure) {
-              emit(AuthError(message: failure.message ?? 'Error del servidor. Por favor, inténtalo de nuevo.'));
+              emit(AuthError(message: 'Error del servidor. Por favor, inténtalo de nuevo. ${failure.message}'));
             } else {
-              emit(const AuthError(message: 'Error al iniciar sesión. Por favor, inténtalo de nuevo.'));
+              emit(AuthError(message: 'Error al iniciar sesión. Por favor, inténtalo de nuevo. ${failure.message}'));
             }
           },
               (user) => emit(AuthSuccess(user: user)),

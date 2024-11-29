@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../presentation/pages/profile/profile_page.dart';
 import '../../../domain/entities/user.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +24,12 @@ class ProfileCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            // Navegar al perfil completo
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(user: user),
+              ),
+            );
           },
           borderRadius: BorderRadius.circular(16),
           child: Padding(

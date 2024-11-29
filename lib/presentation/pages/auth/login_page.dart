@@ -27,8 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   void _submitForm() {
     // Validar el formulario antes de proceder
     if (_formKey.currentState?.validate() ?? false) {
-      // Si la validación pasa, se despacha el evento de login
-      print('Formulario válido');
       // Despachar el evento de login aquí
       context.read<AuthBloc>().add(
         LoginRequested(
@@ -37,7 +35,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } else {
-      // Si la validación falla, muestra un mensaje o realiza alguna acción
       print('Formulario no válido');
     }
   }

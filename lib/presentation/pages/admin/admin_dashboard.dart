@@ -34,6 +34,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             _currentIndex = index;
           });
         },
+        user: widget.user
       ),
     );
   }

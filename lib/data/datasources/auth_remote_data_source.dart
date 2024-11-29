@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../core/api/dio_client.dart';
 import '../../core/utils/constants.dart';
+import '../../presentation/bloc/app_state/app_state_bloc.dart';
 import '../models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
@@ -29,6 +30,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
             responseData.containsKey('user') &&
             responseData.containsKey('token')) {
           final userData = responseData['user'] as Map<String, dynamic>;
+          final token = responseData['token'] as String;
+          dioClient.appStateBloc.add(UpdateToken(token));
           userData['token'] = responseData['token'] as String;
           return UserModel.fromJson(userData);
         } else {
